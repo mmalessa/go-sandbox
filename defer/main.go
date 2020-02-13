@@ -6,13 +6,13 @@ import (
 )
 
 func main() {
-	simpleDemo()
-	closeDeferred()
-	defer someFunc1()
-	someFunc2()
+	// simpleDemo()
+	// closeDeferred()
+	scopesDemo()
 }
 
 func simpleDemo() {
+	fmt.Println("SIMPLE DEMO")
 	someFunction("Normal 1")
 	defer someFunction("Deferred 1")
 	defer someFunction("Deferred 2")
@@ -26,6 +26,7 @@ func someFunction(msg string) {
 }
 
 func closeDeferred() {
+	fmt.Println("\nCLOSE DEFERRED")
 	f, err := os.Open("/etc/issue")
 	if err != nil {
 		panic(err)
@@ -40,12 +41,22 @@ func closeDeferred() {
 	fmt.Println(*f)
 }
 
-func someFunc1() {
-	defer fmt.Println("Defer. SomeFunc1")
-	fmt.Println("SomeFunc1")
+func scopesDemo() {
+	fmt.Println("\nSCOPES DEMO")
+	defer fmt.Println("Defer 1")
+	fmt.Println("Line 1")
+	deferFunc2()
+	deferFunc3()
+	defer fmt.Println("Defer 4")
+	fmt.Println("Line 4")
 }
 
-func someFunc2() {
-	defer fmt.Println("Defer. SomeFunc2")
-	fmt.Println("SomeFunc2")
+func deferFunc2() {
+	defer fmt.Println("Defer 2")
+	fmt.Println("Line 2")
+}
+
+func deferFunc3() {
+	defer fmt.Println("Defer 3")
+	fmt.Println("Line 3")
 }
