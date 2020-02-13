@@ -8,6 +8,8 @@ import (
 func main() {
 	simpleDemo()
 	closeDeferred()
+	defer someFunc1()
+	someFunc2()
 }
 
 func simpleDemo() {
@@ -36,4 +38,14 @@ func closeDeferred() {
 		}
 	}()
 	fmt.Println(*f)
+}
+
+func someFunc1() {
+	defer fmt.Println("Defer. SomeFunc1")
+	fmt.Println("SomeFunc1")
+}
+
+func someFunc2() {
+	defer fmt.Println("Defer. SomeFunc2")
+	fmt.Println("SomeFunc2")
 }
